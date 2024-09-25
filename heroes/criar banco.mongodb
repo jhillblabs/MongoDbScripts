@@ -1,0 +1,176 @@
+mongosh "mongodb+srv://cluster0.q2grp.mongodb.net/" --apiVersion 1 --username Admin
+
+--Acessar um banco
+use heroesDb
+
+--Verificar os bancos existentes
+show dbs
+
+--Verificar as coleções de um banco
+show collections
+
+--Criar uma coleção
+db.createCollection("nome da coleção")
+
+--CRUD
+--Criar uma coleção por inserção de dados
+--CREATE
+db.heroes.insertOne({
+    nome: "Superman",
+    time: "Liga da Justiça",
+    idade: 33,
+    genero: "Masculino",
+    habilidades: [
+        "Superforça",
+        "Voo",
+        "Visão de Calor",
+        "Visão de Raio-X"],
+    usaCapa: true,
+    caracteristicas: {
+        olhos: "Castanho",
+        cabelos: "Preto"
+    }
+})
+
+db.heroes.insertMany([
+    {
+        nome: "Batman",
+        time: "Liga da Justiça",
+        idade: 42,
+        genero: "Masculino",
+        habilidades: [
+            "Inteligência",
+            "Riqueza",
+            "Habilidades de Combate"],
+        usaCapa: true,
+        caracteristicas: {
+            olhos: "Branco",
+            cabelos: "Preto"
+        },
+        universo: "DC"
+    },
+    {
+        nome: "Mulher Maravilha",
+        time: "Liga da Justiça",
+        idade: 5000,
+        genero: "Feminino",
+        habilidades: [
+            "Superforça",
+            "Velocidade",
+            "Sentido Aguçado"],
+        usaCapa: false,
+        caracteristicas: {
+            olhos: "Azul",
+            cabelos: "Preto"
+        },
+        universo: "DC"
+    }
+])
+
+--READ
+db.heroes.find()
+db.heroes.find().pretty()
+db.heroes.find({ usaCapa: false })
+
+--UPDATE
+db.heroes.updateOne(
+    { nome: "Superman" },
+    { $set: { universo: "DC" }}
+)
+
+--DELETE
+db.heroes.deleteOne({ _id: 1 })
+db.heroes.deleteMany({ universo: "DC" })
+
+
+
+db.heroes.insertMany([
+    {
+        nome: "Homem de Ferro",
+        time: "Vingadores",
+        idade: 53,
+        habilidades: [
+            "Inteligência",
+            "Riqueza",
+            "Tecnologia para Armaduras e Combate"],
+        usaCapa: false,
+        caracteristicas: {
+            olhos: "Castanho",
+            cabelos: "Castanho"
+        },
+        universo: "Marvel"
+    },
+    {
+        nome: "Viúva Negra",
+        time: "Vingadores",
+        idade: 36,
+        genero: "Feminino",
+        habilidades: [
+            "Inteligência",
+            "Habilidades de Combate",
+            "Manejamento de Armas"],
+        usaCapa: false,
+        caracteristicas: {
+            olhos: "Verde",
+            cabelos: "Ruivo"
+        },
+        universo: "Marvel"
+    },
+    {
+        nome: "Loki",
+        time: "Vingadores",
+        idade: 1000,
+        genero: "Masculino",
+        habilidades: [
+            "Magia",
+            "Ilusões",
+            "Habilidades de Combate"],
+        usaCapa: true,
+        caracteristicas: {
+            olhos: "Verde",
+            cabelos: "Preto"
+        },
+        universo: "Marvel"
+    },
+    {
+        nome: "Demolidor",
+        time: "Defensores",
+        idade: 30,
+        genero: "Masculino",
+        habilidades: [
+            "Habilidades de Combate",
+            "Sentido Aguçado",
+            "Sabe de Artes Marciais"],
+        usaCapa: false,
+        caracteristicas: {
+            olhos: "Branco (cego)",
+            cabelos: "Castanho"
+        },
+        universo: "Marvel"
+    },
+    {
+        nome: "Rocket Raccoon",
+        time: "Guardiões da Galáxia",
+        idade: 30,
+        genero: "Masculino",
+        habilidades: [
+            "Inteligência Tática",
+            "Habilidades de Pilotagem",
+            "Manejamento de Armas"],
+        usaCapa: false,
+        caracteristicas: {
+            olhos: "Castanhos",
+            pelagem: "Marrom"
+        },
+        universo: "Marvel"
+    }
+])
+
+--UPDATE
+db.heroes.updateOne(
+    { nome: "Rocket Raccoon" },
+    { $set: { genero: "Macho" }}
+)
+
+--DELETE
+db.heroes.deleteMany({ universo: "Marvel" })

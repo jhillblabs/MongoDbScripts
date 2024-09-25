@@ -1,0 +1,8 @@
+git config --global user.name jhillblabs
+git config --global user.email jhilzinhavendito@gamil.com
+
+// Acessar o servidor
+mongosh "mongodb+srv://cluster0.q2grp.mongodb.net/" --apiVersion 1 --username Admin
+
+// Acessar ou Criar o banco
+use heroesDb
